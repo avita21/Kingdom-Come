@@ -20,8 +20,7 @@ image Parchment = im.Scale("images/parchment.png",config.screen_width * 0.7, con
 # Fix Font Size/Color for Main Screen's Title
 # Add Load for bottom
 # Fix Figure Name
-# Add Text scolling/typing - Put individual sounds (Like in Phoenix Wright)
-
+# Put individual sounds (Like in Phoenix Wright or Harvest Moon)
 ####################################################################
 
 
@@ -105,10 +104,11 @@ label Beginning:
     show NVL with dissolve
     "It’s been a while since work has kept you busy. Eloas isn’t a kingdom without 
     problems, per se, but lately the reputation for recklessness your group has acquired 
-    seems to have discouraged some of the more tentative clients from approaching.\n" 
-
+    seems to have discouraged some of the more tentative clients from approaching." 
+    
     "You aren’t expecting anything different today, but when you open 
     the mail portal, you find a letter waiting inside."
+    
     menu:
         "Open the letter":
             nvl clear
