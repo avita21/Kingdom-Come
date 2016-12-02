@@ -1,57 +1,45 @@
 ﻿## The script of the game goes in this file.
 
-## Declare characters used by this game. The color argument colorizes the name
-## of the character.
-define Skyler = Character('Skyler', kind = nvl, who_color="21618C", what_color="AED6F1")
-define Vo = Character('Vo', kind = nvl, who_color="6C3483", what_color="D7BDE2")
-define Hallis = Character('Hallis', kind = nvl, who_color="922B21", what_color="D98880")
-define narrator = Character(None, kind = nvl, what_color="FEF5E7") 
-define letter = Character(None, bold=True, kind=nvl,what_color="000000", what_font="JandaElegantHandwriting.ttf")
-define title = Character(None, what_color="E74C3C", what_font="KINGC___.ttf")
-
-## Declare Image Files
-image bg Aremoch city = "Greece.jpg"
-image NVL = "gui/nvl.png"
-image Parchment = im.Scale("images/parchment.png",config.screen_width * 0.7, config.screen_height * 0.9,
-                          align = (0.5, 0.3))
-
-###################################################################
-## TODO Notes:
-# Fix Font Size/Color for Main Screen's Title
-# Add Load for bottom
-# Fix Figure Name
-# Put individual sounds (Like in Phoenix Wright or Harvest Moon)
-####################################################################
-
-
-
-
-
-## The game starts here.
-
-label start:
-
-    ## Show a background. This uses a placeholder by default, but you can add a
-    ## file (named either "bg room.png" or "bg room.jpg") to the images
-    ## directory to show it.
-
-    scene bg Aremoch city
-    
-    show text ("{alpha=*0.3}{size=400}{font=KINGC___.ttf}{color=#FF0099}Kingdom Come{/color}{/font}{/size}{/alpha}")
-    with dissolve
-    pause 2
-    hide text
-    with dissolve
-    ## These display lines of dialogue.
-    
-    jump Beginning
-   
-    ## This ends the game.
-
-    return
     
 # Initialize the nvl_menu display
 init python:
+    # sounds:
+    def typewriter(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-typwriter.wav", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+
+    def lowmale(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-lowmale.wav", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+            
+    def lowfemale(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-lowfemale.wav", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+            
+    def male(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-blipmale.wav", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+            
+    def female(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-blipfemale.wav", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+            
+    def default(event, **kwargs):
+        if event == "show":
+            renpy.music.play("sfx-default1.wav", channel="sound", loop=True, fadeout =3, fadein=3, tight=False)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound")
+
     style.default.drop_shadow = (1, 1)
     style.default.drop_shadow_color = "#000"
     menu = nvl_menu
@@ -96,6 +84,53 @@ init python:
     # add arrow keys to progress through dialogue:
     config.keymap['dismiss'].append('K_RIGHT')
     config.keymap['rollback'].append('K_LEFT')
+
+## Declare characters used by this game. The color argument colorizes the name
+## of the character.
+define Skyler = Character('Skyler', kind = nvl, who_color="21618C", what_color="AED6F1")
+define Vo = Character('Vo', kind = nvl, who_color="6C3483", what_color="D7BDE2")
+define Hallis = Character('Hallis', kind = nvl, who_color="922B21", what_color="D98880")
+define narrator = Character(None, kind = nvl, what_color="FEF5E7") 
+define letter = Character(None, bold=True, kind=nvl,what_color="000000", what_font="JandaElegantHandwriting.ttf", callback=typewriter)
+define title = Character(None, what_color="E74C3C", what_font="KINGC___.ttf")
+
+## Declare Image Files
+image bg Aremoch city = "Greece.jpg"
+image bg Campfire = "maxresdefault.jpg"
+image NVL = "gui/nvl.png"
+image Parchment = im.Scale("images/parchment.png",config.screen_width * 0.7, config.screen_height * 0.9,
+                          align = (0.5, 0.3))
+
+###################################################################
+## TODO Notes:
+# Fix Font Size/Color for Main Screen's Title
+# Add Load for bottom
+# Fix Figure Name
+# Put individual sounds (Like in Phoenix Wright or Harvest Moon)
+####################################################################
+
+## The game starts here.
+
+label start:
+
+    ## Show a background. This uses a placeholder by default, but you can add a
+    ## file (named either "bg room.png" or "bg room.jpg") to the images
+    ## directory to show it.
+
+    scene bg Aremoch city
+    play music "25 - Record 07 - STH Spring season map.mp3" fadein 2 fadeout 2
+    show text ("{alpha=*0.3}{size=400}{font=KINGC___.ttf}{color=#FF0099}Kingdom Come{/color}{/font}{/size}{/alpha}")
+    with dissolve
+    pause 2
+    hide text
+    with dissolve
+    ## These display lines of dialogue.
+    
+    jump Beginning
+   
+    ## This ends the game.
+
+    return
 
 ############    BEGIN NARRATIVE     ############################################################
 
@@ -328,19 +363,153 @@ label Check_On_Friends:
 
 
     "You smile at your friends and with a flourish, sign the bottom of the letter."
-    return
+    jump Sign_Contract
     
 label Sign_Contract:
     nvl clear
     "The moment you finish scrawling your name across the parchment, the letter 
     flares with golden light, building in intensity until you’re forced to shield 
-    your eyes from the glare."
+    your eyes from the glare." 
     
-    "Judging by Vo’s muttered swearing and Hallis’ surprised 'oh!', you aren’t the only one 
-    caught off-guard."
+    "Judging by Vo’s muttered swearing and Hallis’ surprised “oh!”, you aren’t the only 
+    one caught off-guard. Letters float through the air, gleaming as they peel off the 
+    parchment, only to settle back down in new positions and new runnels of ink." 
+
+
+    "When the light fades back down, you are left with a map in your hands, locations 
+    carefully labeled - sometimes with warnings. Vo peers over your shoulder and winces."
+
+
+    Vo "Aw, man, we need to wear the bracelets? I hated wearing those things during 
+        meditations. Makes my magic feel itchy."
+
+    Hallis "That’s because it’s not used to being contained. It’s not supposed to be." 
     
+    nvl clear
+    
+    "You notice Hallis rubbing his wrists, almost absentmindedly. Your tall friend 
+    doesn’t often speak about his past, but he’s mentioned before that he once lived 
+    in Aremoch." 
+     
+    menu:
+        "Ask Hallis if he'll be okay with the bracelets":
+            $Narrative_variables['Hallis Favor'] = Narrative_variables.get('Hallis Favor', 0) + 1 
+            jump Hallis_Bracelets
+        "Prepare to set off":
+            $Narrative_variables['prepare immediately'] = True
+            jump Prepare2go
     return
     
+label Hallis_Bracelets:
+    Skyler "Hallis, is everything alright? I know you’ve had experience with the 
+            bracelets before."
+
+    "Hallis’ brow is furrowed, but he gives you a grateful little smile at your 
+    question." 
+
+    Hallis "I’ll be fine, Skyler. Thanks for asking. It will just… take some time 
+    to get used to it again. I’m more worried about the two of you." 
+
+    "It’s true that the only time most of Eloas’ mages have had to wear magical 
+    suppression bracelets was during training classes. You can vaguely remember 
+    the feeling; it wasn’t a pleasant one. Wearing it for possibly days, even weeks 
+    at a time… Vo makes a face that accurately sums up up your feelings on the matter."
+    
+    nvl clear
+    
+    Vo "I’m not saying it won’t suck, but I’ll deal. I use my magic to set my bombs 
+    off. Guess I’ll just have to bring matches instead."
+
+    "Hallis huffs out a laugh." 
+
+    Hallis "Somehow, that makes me feel better. I’m not certain I’m happy about it."
+
+    Vo "Love you too, Hallis."
+
+    Skyler "Then I guess it’s time to get ready."
+    nvl clear
+    jump Prepare2go
+    return
+
+label Prepare2go:
+    "The three of you agree to meet just outside of Aorna, the city closest 
+    to the border of the two kingdoms. Hallis leaves the pavilion with a 
+    mention of “preparations,” and Vo follows soon after muttering something 
+    about explosives and “ten thousand fucking matches.” You are left to your 
+    own devices, and so you return home to pack." 
+
+    "Your family is Eloan nobility, and you have never had reason to leave the 
+    kingdom. The togas and cloth wrappings so favored in Eloas are all you know; 
+    with luck, it will serve adequately in your time in Coruscos as well." 
+    
+    "You pick clothing in shades of blues and greens, opening a bag far larger on 
+     the inside than it seems and put the articles inside. Hallis is in charge of 
+     food supply, as you cannot cook and Vo is no longer allowed anywhere near the spices."
+    nvl clear
+    
+    "It’s not the first time that you’ve been grateful for Hallis’ stabilizing presence 
+    in your group. Vo gives heart, but Hallis keeps you all sane." 
+
+    "By the end, there’s only a little bit of space left in your pack, even with 
+    the enchantment. You have space to pack one more thing, and two options catch 
+    your eye." 
+
+    "The first is a slender willow reed, a project you finished when you were a 
+    child exploring enchantments. The runes covering it were inscribed by a 
+    child’s careful hands, and when you shake it, the reed gives off a tremulous 
+    white light in a forward direction." 
+    
+    "Your teacher considered it a failure because it didn’t disperse light evenly, 
+     but you kept it as a memento."
+    nvl clear
+    "The second is a bag of dust, a purchase gleefully encouraged during a market 
+    outing with Vo. When you throw a handful in the air, the dust shimmers and 
+    creates an illusion of a wall, patterned to match the environment around it. 
+    It lasts only for a few minutes, but, as Vo pointed out, that’s more than 
+    enough time to cause a little mischief."
+    
+    menu:
+        "Put the wand in the bag":
+            $Narrative_variables['Bag'] = 'Wand'
+        "Put the dust in the bag":
+            $Narrative_variables['Bag'] = 'Dust'
+    jump CampScene_going
+    return
+    
+label CampScene_going:
+    stop music fadeout 0.1
+    play music "27 - Record 09 - AWL Winter theme.mp3" fadein 1 fadeout 5 loop
+    scene bg Campfire with fade
+    show NVL with dissolve
+    nvl clear
+    "Once you’re packed, you head out. It’s time to meet Hallis and Vo at the camp."
+    
+    $Narrative_variables['CampTalkFirst1'] = []
+    jump CampScene_goingMenu
+    return
+    
+label CampScene_goingMenu:
+    menu:
+        "Talk to Hallis" if 'Hallis' not in Narrative_variables['CampTalkFirst1']:
+            $Narrative_variables['CampTalkFirst1'].append('Hallis')
+            jump Camp_Hallis1
+        "Talk to Vo" if 'Vo' not in Narrative_variables['CampTalkFirst1']:
+            $Narrative_variables['CampTalkFirst1'].append('Vo')
+            jump Camp_Vo1
+        "Prepare for travel" if Narrative_variables['CampTalkFirst1']:
+            jump Prepare4Travel
+    return
+
+label Camp_Hallis1:
+    jump CampScene_goingMenu
+    return
+    
+label Camp_Vo1:
+    jump CampScene_goingMenu
+    return
+    
+label Prepare4Travel:
+    return
 label END:
     return
     return
