@@ -1,6 +1,8 @@
 ﻿## The script of the game goes in this file.
 
-    
+################################################################################
+# Game Screen/Unrelated speech sounds:
+################################################################################
 # Initialize the nvl_menu display
 init python:
     # sounds:
@@ -36,7 +38,8 @@ init python:
             
     def default(event, **kwargs):
         if event == "show":
-            renpy.music.play("sfx-default1.wav", channel="sound", loop=True, fadeout =3, fadein=3, tight=False)
+            renpy.music.play("sfx-default1.wav", channel="sound", loop=True, 
+                              fadeout =3, fadein=3, tight=False)
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="sound")
 
@@ -74,6 +77,8 @@ init python:
     config.empty_window = nvl_show_core
     config.window_hide_transition = dissolve
     config.window_show_transition = dissolve
+    # prevent infinite scrolling:
+    config.nvl_list_length = 173
     
     # If you want a Drop Shadow for your NVL text, 1 pixel to the right and 1 pixel down.
     style.nvl_dialogue.drop_shadow = [(1, 1)] 
@@ -84,6 +89,10 @@ init python:
     # add arrow keys to progress through dialogue:
     config.keymap['dismiss'].append('K_RIGHT')
     config.keymap['rollback'].append('K_LEFT')
+
+#######################################################################################
+# Characters and Images:
+#######################################################################################
 
 ## Declare characters used by this game. The color argument colorizes the name
 ## of the character.
@@ -131,10 +140,13 @@ label start:
     ## This ends the game.
 
     return
-
+################################################################################################
 ############    BEGIN NARRATIVE     ############################################################
+################################################################################################
 
-
+####################
+## Part 1: In Eloas:
+####################
 label Beginning:
     show NVL with dissolve
     "It’s been a while since work has kept you busy. Eloas isn’t a kingdom without 
@@ -193,7 +205,8 @@ label Do_We_Accept_Letter:
     Hallis "Well, Skyler? Are we taking it?"
     nvl clear
     Vo "I’m going to be so damn rich. 
-        Skyler, please tell me we’re doing this. I could get so many fireworks with that much money."
+        Skyler, please tell me we’re doing this. 
+        I could get so many fireworks with that much money."
     
     menu:
         "'Of course we're taking the job'":
@@ -213,8 +226,8 @@ label Opening_letter:
     "The lighting in the pavilion your group works out of is fine, and you move over 
     to beneath one of the floating globes of light that hover near the tops of the 
     pillars."
-    call Read_Letter
-    call Friends_Letter_Arrival(True)
+    call Read_Letter from _call_Read_Letter
+    call Friends_Letter_Arrival(True) from _call_Friends_Letter_Arrival
     jump Do_We_Accept_Letter
     return
 
@@ -239,11 +252,13 @@ label Read_Letter:
             we would like to hire you to find our missing agent and bring them home." 
     nvl clear
     letter "They most often frequented the Smog’s End tavern, and work under the alias of Cinder."
-    letter "We are prepared to offer you a sum of five hundred{b} {i}dromos{/i}{/b} for accepting this contract, 
-            and double that upon successful completion."
+    letter "We are prepared to offer you a sum of five hundred{b} {i}dromos{/i}{/b} for accepting 
+            this contract, and double that upon successful completion."
 
     letter "Simply sign below for further information to reveal itself."
-    letter "{size=250}{font=b5wd.ttf}f{/font}{/size}{size=100}\nX:{/size}______________________________________________"
+    letter "{size=250}{font=b5wd.ttf}f{/font}{/size}{size=100}
+            
+            X:{/size}______________________________________________"
     nvl clear
     hide Parchment with dissolve
     show NVL with dissolve
@@ -255,10 +270,10 @@ label Read_Letter:
     
 label Waiting_for_letter:
    $ Narrative_variables["letter"] = False
-   call Friends_Letter_Arrival
+   call Friends_Letter_Arrival from _call_Friends_Letter_Arrival_1
    nvl clear
    "You look at the letter."
-   call Read_Letter
+   call Read_Letter from _call_Read_Letter_1
    jump Do_We_Accept_Letter
    return
    
@@ -283,10 +298,10 @@ label Sketchy_Alliance:
 
     menu:
         "I guess we're doing this, then. It's for a good cause.":
-            $ Narrative_variables['reason'] = 'Pro-Mage'
+            $ Narrative_variables['Pro-Mage'] = 1
             jump Sign_Contract
         "We have to pay the bills, somehow...":
-            $ Narrative_variables['reason'] = 'Pro-Money'
+            $ Narrative_variables['Pro-Money'] = 1
             jump Sign_Contract
     return
    
@@ -367,6 +382,7 @@ label Check_On_Friends:
     
 label Sign_Contract:
     nvl clear
+    play sound "sfx-maaagical.wav"
     "The moment you finish scrawling your name across the parchment, the letter 
     flares with golden light, building in intensity until you’re forced to shield 
     your eyes from the glare." 
@@ -476,6 +492,9 @@ label Prepare2go:
     jump CampScene_going
     return
     
+#######################
+## Part 1.5 - Campscene
+#######################
 label CampScene_going:
     stop music fadeout 0.1
     play music "27 - Record 09 - AWL Winter theme.mp3" fadein 1 fadeout 5 loop
@@ -489,6 +508,12 @@ label CampScene_going:
     return
     
 label CampScene_goingMenu:
+    python:
+        if 'Hallis' in Narrative_variables['CampTalkFirst1']:
+            if 'Vo' in Narrative_variables['CampTalkFirst1']:
+                Narrative_variables['CampTalkFirst1'].append('Travel')
+                renpy.jump('Prepare4Travel')
+        
     menu:
         "Talk to Hallis" if 'Hallis' not in Narrative_variables['CampTalkFirst1']:
             $Narrative_variables['CampTalkFirst1'].append('Hallis')
@@ -496,20 +521,239 @@ label CampScene_goingMenu:
         "Talk to Vo" if 'Vo' not in Narrative_variables['CampTalkFirst1']:
             $Narrative_variables['CampTalkFirst1'].append('Vo')
             jump Camp_Vo1
-        "Prepare for travel" if Narrative_variables['CampTalkFirst1']:
+        "Prepare for travel" if Narrative_variables['CampTalkFirst1'] and 'Travel' not in Narrative_variables['CampTalkFirst1']:
             jump Prepare4Travel
     return
 
 label Camp_Hallis1:
+    "Hallis’ section of the camp is carefully managed. The ground has been flattened
+    out, any offending sticks or twigs removed from the premises by hand.
+    The blanket he rolled out across the  dirt is a deep green, comfortable but 
+    clearly not ostentatious."
+    
+    "Hallis sits atop it, staring at the journal in his 
+    hand, every so often scribbling down a note. He notices your approach, and 
+    pats the spot on the blanket next to him, a small smile on his face."
+
+    Hallis "Feel free to join me if you like. I’m not doing much at the moment."
+    nvl clear
     jump CampScene_goingMenu
     return
     
 label Camp_Vo1:
+    "Vo’s tent is something of an impressive construct, that even after years you 
+    really aren’t sure how it works. There are poles involved, and questionable 
+    amounts of fabric, and a lot of muffled swearing during the setup along with 
+    a healthy dose of magic."
+    
+    "The result is something like a tiny pavilion, 
+    comfortable, spacious, and - most importantly - fireproof. Presently all 
+    you can see of your friend is a bare foot sticking out from the entrance. 
+    Long-standing tradition demands you tickle him to get his attention."
+    nvl clear
     jump CampScene_goingMenu
     return
     
 label Prepare4Travel:
+    nvl clear
+    "Over the course of your trek, the pieces of your plan begin to come together. 
+    Hallis has begun what he does best: meticulously planning out every last detail 
+    of the mission, each potential path your group might have to take, and any 
+    other factor that could possibly be included."
+    
+    "Vo offers a few suggestions where his pyrotechnic expertise could be put to 
+     good use, and otherwise sticks to jaunty, slightly off-tune whistling. 
+     When it comes to improvisation, though, you know you can count on him." 
+
+    "The first order of business is entrance, of course." 
+
+    Hallis "There isn’t any way around the bracelets. Trying to talk your way out 
+    of them won’t go well. Everyone is stopped at the gates, and everyone gets a 
+    bracelet, magical or not."
+    
+    Vo "And you’re sure there’s no way we could just sneak into the city? I mean, 
+    getting magic-neutered is kind of the last thing I ever want to experience."
+
+    nvl clear
+    Hallis "For the tenth time, there’s no way that I can think of. I think you’re 
+    underestimating just how advanced Aremoch is, especially in Coruscos. The 
+    capital city houses everyone important in it: they haven’t spared any expense 
+    in making sure it’s virtually impregnable, especially to those with magic."
+    
+    menu:
+        "It was a good idea, Vo":
+            $Narrative_variables['Vo Favor'] = Narrative_variables.get('Vo Favor', 0) + 1
+            Skyler "It was a good idea, Vo"
+        "Hallis is right. We just have to deal with what we've got.":
+            Skyler  "Hallis is right. We just have to deal with what we've got."
+            $Narrative_variables['Hallis Favor'] = Narrative_variables.get('Hallis Favor', 0) + 1
+            
+    Skyler "There’s just no way around the bracelets, and that means no magic. 
+            Do either of you have any ideas on how to deal with that?"
+    
+    "Hallis sighs heavily."
+
+    Hallis "I know Coruscos. I can help us blend in, avoid suspicion. 
+    It’ll take some of the funds we received ahead of time to manage it, but I 
+    can make sure no one looks twice at us unless we do something really stupid."
+
+    "He shoots a look at Vo as he says this, who just winks at him in return."
+    nvl clear
+    Vo "Oooorrrr we can say ‘fuck it’ to the hand we’ve been dealt, and work on 
+    removing the bracelets instead." 
+    
+    Vo "I’ll need some time to see what material I’m 
+    dealing with, but if we can get my bag past the guard then I should have 
+    everything I need to get them off of us."
+
+    Hallis "Which, if I may point out, will absolutely draw everyone’s attention to us the 
+    second they see our bare wrists or we use magic in public. I’m not saying it’s a bad idea, 
+    but it’s definitely a risky one."
+
+    Vo "Yeah, but at least we’ll be able to defend ourselves. We’re here on behalf of 
+        a bunch of revolutionaries, remember? There’s a pretty big chance this is all 
+        gonna go ass-upwards no matter what we do."
+    
+    menu:
+        "Let's talk about keeping out of sight, Hallis":
+            call Hallis_sneaky_idea
+            call Vo_sneaky_idea
+            call Combo_sneaky_idea(cl=True)
+        "Any ideas for getting your bag past the guard, Vo?":
+            call Vo_sneaky_idea
+            call Hallis_sneaky_idea(cl=False)
+            nvl clear
+            call Combo_sneaky_idea(cl=False)
     return
+    
+    
+label Hallis_sneaky_idea(cl=True):
+    Skyler "Let's talk about keeping out of sight, Hallis"
+    "Hallis straightens up a bit."
+    if cl:
+        nvl clear
+    Hallis "It would be a plan in two steps. There’s no avoiding attention when 
+    we arrive. None of us look like we’re from Aremoch, let along Coruscos, but 
+    with a change in outfit and a few other things we can at least attempt to 
+    blend in." 
+    
+    Hallis "We just have to give the authorities no reason to give us a second 
+    glance once we’ve passed through the gates, and then we can just...disappear." 
+
+    Vo "Aw, you mean I have to lose the toga? I like my toga..."
+  
+    Hallis "Once you see Coruscos, I think you’ll change your mind"
+    
+    return
+    
+label Vo_sneaky_idea:
+    Skyler "I like the idea that gets me out of these cuffs as fast as possible. 
+            Any ideas for getting your bag past the guard, Vo?"
+    
+    Vo "Okay, so hear me out. I don’t have a fucking clue how to get my stuff 
+    past the gate without being stopped, so if we can’t manage that then I’ve 
+    got nothing."
+    nvl clear
+    Hallis "What about procuring supplies inside Coruscos? Your little bag of tricks--no offense meant--probably
+    can’t compare to what you can actually find inside the city." 
+
+    "Vo sticks his tongue out at Hallis, the childish gesture perfectly at home on 
+    his face."
+
+    Vo "Some offense taken! I know Coruscus is apparently super advanced and all, 
+    but they probably won’t have acids and bomb supplies readily available for 
+    purchase. That takes a special kind of stupid."
+
+    Hallis "I...you’re right. They wouldn’t. Although maybe..."
+
+    Vo "Maybe what?"
+
+    Hallis "I have to think about it some more. Anyway, what’s your plan if we
+    did manage to get your bag through?"
+    
+    Vo "It’s pretty simple, honestly. We find somewhere out of sight, I use a 
+    corrosive agent to ruin the bracelets without damaging our skin, and we’re 
+    in the clear." 
+    nvl clear
+    Vo "If we’re lucky, I may even be able to break the bracelets 
+    without making it look like they’re broken. That way we won’t draw attention 
+    to ourselves either."
+    return
+    
+  
+label Combo_sneaky_idea (cl=True):
+    Skyler "Why not a combination of your ideas?"
+    Skyler "Honestly, I like both of your ideas. I don’t want to lose my magic, 
+    but if we could manage to stay out of sight on top of that then we’d be in an 
+    even better situation for our mission. What are the odds we could get your bag 
+    past the gates, Vo? Any ideas on how to do it?"
+    
+    Vo "No clue, and no clue again. I’ve never been to Aremoch before, let alone 
+    Coruscos."
+
+    Hallis "I have. Barring a miracle, there’s no way your bag is getting through.
+    We’d need to either get it past the wall some other way, or..."
+    
+    Vo "Or what?"
+    
+    Hallis "It’s risky, but..."
+    if cl:
+        nvl clear
+    Vo "Hallis, literally everything about this mission is risky. Risky is what we 
+    do. It’s why we got hired in the first place!"
+    if not cl:
+        nvl clear
+    "You all grin a little at that. Vo’s not wrong. After the incident with the 
+    temple ruins and the serpent, you have earned a bit of a reputation along 
+    those lines." 
+
+    Hallis "Fair enough. Let’s say we leave your bag hidden outside the city, 
+    Vo. You’re right; there’s no way to purchase your supplies in the city...not 
+    legally." 
+
+    Vo "Oh, I like where this is going."
+ 
+    Hallis "There’s someone - in theory - in the city that might be able to 
+    get you what you need without drawing attention. They called themselves 
+    the Prince of Many Masks, and they more or less rule the underworld of 
+    Coruscos." 
+   
+    Hallis "So long as you have the money or...other...favors, they’ll 
+    get you what you need."
+    
+    Vo "What do you mean by “other favors?”"
+    if cl:
+        nvl clear
+    Hallis "Information. Blackmail. You scratch my back, I’ll scratch yours...that 
+    kind of thing."
+
+    Vo "Sex?"
+    if not cl:
+        nvl clear
+    "Hallis’ face turns red and he facepalms. You hold back a laugh, but only 
+    just barely." 
+
+    Hallis "...no, Vo. Not sex."
+
+    Vo "Damn. And here I thought I had something to contribute." 
+
+    Hallis "I don’t know what price the Prince might name, but if you’re set on 
+    removing the bracelets, we’ll probably have to reach out to them." 
+  
+    menu:
+        "I like that idea. Honor among thieves, right?":
+            Skyler "It’s not like we can trust the people in power anyway, 
+                    so we may as well side with the criminals."
+            $Narrative_variables['Renegade4life'] = 1
+        "Working with a crime boss sounds risky":
+            Skyler "Working with a crime boss sounds risky, but if there’s no other choice…"
+            $Narrative_variables['Paragon'] = 1
+    return
+
+ 
+  
+  
+  
 label END:
     return
     return

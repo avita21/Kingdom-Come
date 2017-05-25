@@ -1,28 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 491, in script
-    menu:
-  File "game/script.rpy", line 492, in <module>
-    "Talk to Hallis" if 'Hallis' not in Narrative_variables['CampTalkFirst1']:
-KeyError: 'CampTalkFirst1'
+  File "game/script.rpy", line 624, in script call
+    call Hallis_sneaky_idea(cl=False)
+  File "game/script.rpy", line 632, in script
+    if cl:
+  File "game/script.rpy", line 632, in <module>
+    if cl:
+NameError: name 'cl' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 491, in script
-    menu:
-  File "C:\Users\Neo\Documents\renpy-6.99.11-sdk\renpy\ast.py", line 1450, in execute
-    choice = renpy.exports.menu(choices, self.set)
-  File "C:\Users\Neo\Documents\renpy-6.99.11-sdk\renpy\exports.py", line 817, in menu
-    if renpy.python.py_eval(condition) ]
+  File "game/script.rpy", line 624, in script call
+    call Hallis_sneaky_idea(cl=False)
+  File "game/script.rpy", line 632, in script
+    if cl:
+  File "C:\Users\Neo\Documents\renpy-6.99.11-sdk\renpy\ast.py", line 1647, in execute
+    if renpy.python.py_eval(condition):
   File "C:\Users\Neo\Documents\renpy-6.99.11-sdk\renpy\python.py", line 1670, in py_eval
     return py_eval_bytecode(code, globals, locals)
   File "C:\Users\Neo\Documents\renpy-6.99.11-sdk\renpy\python.py", line 1665, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 492, in <module>
-    "Talk to Hallis" if 'Hallis' not in Narrative_variables['CampTalkFirst1']:
-KeyError: 'CampTalkFirst1'
+  File "game/script.rpy", line 632, in <module>
+    if cl:
+NameError: name 'cl' is not defined
 
 Windows-8-6.2.9200
 Ren'Py 6.99.11.1749

@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 483: expected simple expression
-    stop music fadeout
-                      ^
+File "game/script.rpy", line 81: invalid syntax
+    define config.nvl_list_length = 173
+                 ^
+    
 
 Ren'Py Version: Ren'Py 6.99.11.1749
