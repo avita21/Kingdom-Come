@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story>
+	<beginning>
+		It’s been a while since work has kept you busy. Eloas isn’t a kingdom without problems, per se, but lately the reputation for recklessness your group has acquired seems to have discouraged some of the more tentative clients from approaching. You aren’t expecting anything different today, but when you open the mail portal, you find a letter waiting inside. 
+	</beginning>
+
+	<decision num="1">
+		<choice num="1">
+			Open the letter
+		</choice>
+		<choice num="2">
+			Wait until Hallis and Vo come
+		</choice>
+	</decision>
+
+	<letter>
+		“To the group known as [group]: The Alliance Aspirant has need of your particular services to further our cause. As you well know, magic is banned in our neighbor kingdom of Aremoch, in stark contrast to the freedom Eloas provides us. In our efforts to encourage the freedom of magic in Aremoch, we have placed agents and speakers in many of the kingdom’s cities. We have recently lost contact with our agent in the city of Coruscos. Given your group’s reputation for creativity under duress, we would like to hire you to find our missing agent and bring them home. They most often frequented the Smog’s End tavern, and work under the alias of Cinder. 
+ 
+		We are prepared to offer you a sum of five hundred dromos for accepting this contract, and double that upon successful completion. Simply sign below for further information to reveal itself.”
+	</letter>
+
+	<openLetter>
+		There is no signature at the bottom of the letter, merely an odd symbol, like an arc of light coming over the ridge of a mountain. An empty line waits for your signing. 
+ 
+		The not-so-distant sound of bickering and good-natured laughter announces your friends’ joint arrival. Hallis and Vo enter the pavilion a moment later, eyes landing on the letter in your hands. Hallis gives the letter a curious look. His tall frame is dressed in elegant folds of forest-green cloth that complement his eyes. 
+		 
+		Hallis: Correspondence? Do we have work again, Skyler?
+		Vo sighs, leaning against a pillar. The cream-white of his toga loops around one shoulder in lazy drapery, leaving a borderline-scandalous amount of tanned skin bare, save for what looks like charcoal stains and possibly burn marks. He summons a dancing orb of fire with an elegant pull of his wrist, and sets it to move in darting circles around the stone. 
+ 
+		Vo: There goes my plans for today. So what is it?
+		 
+		You wordlessly hand Hallis the letter. Vo scowls at you, no bite to it, and moves to stand next to Hallis on the tips of his toes to see properly. Vo’s mouth moves soundlessly as he reads; Hallis’ expression doesn’t change, save for the slightest furrowing of his brow, before he looks back at you. The corner’s of Vo’s mouth are twitching, probably only just holding back one of his trademark grins.
+		 
+		Hallis: Well, Skyler? Are we taking it?
+		 
+		Vo: I’m going to be so damn rich. Skyler, please tell me we’re doing this. I could get so many fireworks with that much money.
+	</openLetter>
+
+
+</story>
