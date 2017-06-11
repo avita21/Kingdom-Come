@@ -76,10 +76,23 @@ hr {
 }
 
 #narrative {
-	position: fixed;
-	text-align: left;
-	font-size: 5vmin;
-	left: 25vw;
-	/*top: 20vh; */
-	top: 150px;
+		position: fixed;
+		text-align: left;
+		font-size: 5vmin;
+		left: 10vw;
+		/*top: 20vh; */
+		top: 150px;
+}
+
+
+/* FOR DESKTOP: */
+@media screen and (min-device-width: 600px){ 
+	#narrative {
+		position: fixed;
+		text-align: left;
+		font-size: 5vmin;
+		left: 25vw;
+		/*top: 20vh; */
+		top: 150px;
+	}
 }
