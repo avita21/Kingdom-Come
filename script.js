@@ -3,14 +3,20 @@
 
 /* Fade out title on click */
 $(document).ready(function(){
+	/* Detect if on mobile device: */
+	var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 	$(".kingdomcome").one('click', function(){
 		$("#back").fadeOut(1000, function() {
-			$(this).css('background', 
-			'linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 80%,rgba(0,0,0,1) 100%').fadeIn('3000');
+			/* add faded black background if not on mobile: */
+			if (!isMobile.matches) {
+				$(this).css('background', 
+				'linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 80%,rgba(0,0,0,1) 100%').fadeIn('3000');
+			}
+			/* fade the titles */
 			$(".kingdomcome").fadeOut(1000, function(){
 				$(".kingdomtitle").append("Kingdom Come<hr>");
 				$(".kingdomtitle").fadeIn(1000);
-				// BEGIN THE GAME:
+				/* BEGIN THE GAME: */
 				kingdom_come();
 			});
 		});
