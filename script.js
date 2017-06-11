@@ -14,6 +14,7 @@ $(document).ready(function(){
 			}
 			/* fade the titles */
 			$(".kingdomcome").fadeOut(1000, function(){
+				$(".kingdomtitle").hide();
 				$(".kingdomtitle").append("Kingdom Come<hr>");
 				$(".kingdomtitle").fadeIn(1000);
 				/* BEGIN THE GAME: */
