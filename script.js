@@ -44,13 +44,7 @@ function kingdom_come(){
 
 function begin_narrative(xml) {
 	xmlDoc = xml.responseXML;
-	var x, i, txt;
-	txt = "";
-    x = xmlDoc.documentElement.childNodes;
-    for (i = 0; i < x.length; i++) { 
-        if (x[i].nodeType == 1) {
-            txt += x[i].nodeName + "<br>";
-        }
-    }
-	document.getElementById("narrative").innerHTML = txt;
+	txt = xmlDoc.getElementsByTagName("beginning")[0].childNodes[0];
+
+	document.getElementById("narrative").innerHTML = txt.nodeValue;
 }

@@ -82,6 +82,7 @@ hr {
 		left: 10vw;
 		/*top: 20vh; */
 		top: 150px;
+		margin-right: 10vw;
 }
 
 
@@ -90,9 +91,10 @@ hr {
 	#narrative {
 		position: fixed;
 		text-align: left;
-		font-size: 5vmin;
+		font-size: 3vh;
 		left: 25vw;
 		/*top: 20vh; */
 		top: 150px;
+		margin-right: 25vw;
 	}
 }
