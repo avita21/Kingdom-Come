@@ -4,7 +4,7 @@
 /* Fade out title on click */
 $(document).ready(function(){
 	/* Detect if on desktop: */
-	var isDesktop = window.matchMedia("only screen and (min-width: 600px)");
+	var isDesktop = window.matchMedia("only screen and (min-device-width: 600px)");
 	$(".kingdomcome").one('click', function(){
 		$("#back").fadeOut(1000, function() {
 			/* add faded black background if not on mobile: */
