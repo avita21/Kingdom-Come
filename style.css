@@ -12,6 +12,30 @@ html, body {
 	background-size: cover;
 }
 
+.bottom {
+	position: fixed;
+	opacity: 0.5;
+	bottom: 0;
+}
+
+.bottom .left {
+	left: 0;
+}
+
+.bottom .right {
+	right: 0;
+}
+
+.horflip {
+ 	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    z-index: -1;
+}
+
 @font-face {
 	font-family:"Kingc";
 	src: url("game/KINGC___.TTF") format('truetype');
@@ -44,10 +68,11 @@ html, body {
 
 hr { 
     border: 0;
-    height: 10px;
-    width: 100vw;
+    width: 80vw;
+    height: 50px;
     margin-bottom: 50px;
- 	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)); 
+ 	background: url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
+ 	/* linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0), transparent)  */
 }
 
 @keyframes kingdomcomeani {
@@ -76,13 +101,13 @@ hr {
 }
 
 #narrative {
-		position: fixed;
-		text-align: left;
-		font-size: 5vmin;
-		left: 10vw;
-		/*top: 20vh; */
-		top: 150px;
-		margin-right: 10vw;
+	position: fixed;
+	text-align: left;
+	font-size: 5vmin;
+	left: 10vw;
+	/*top: 20vh; */
+	top: 150px;
+	margin-right: 10vw;
 }
 
 
@@ -97,4 +122,16 @@ hr {
 		top: 150px;
 		margin-right: 25vw;
 	}
+}
+
+#narrative: after{
+	position: absolute;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+  	content: "";
+  	background: linear-gradient(to top,
+     rgba(255,255,255, 1) 20%, 
+     rgba(255,255,255, 0) 80%
+  );
 }
