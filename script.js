@@ -1,24 +1,24 @@
 /* Kingdom Come Script File */
 
 /* CONSTANTS: */
-var TITLEFADE = 1000;
+var DEFAULTFADE = 1000;
 
 /* Fade out title on click */
 $(document).ready(function(){
 	/* Detect if on desktop: */
 	var isDesktop = window.matchMedia("only screen and (min-device-width: 600px)");
 	$(".kingdomcome").one('click', function(){
-		$("#back").fadeOut(TITLEFADE, function() {
+		$("#back").fadeOut(DEFAULTFADE, function(){
 			/* add faded black background if not on mobile: */
 			if (isDesktop.matches) {
 				$(this).css('background', 
 				'linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 80%,rgba(0,0,0,1) 100%').fadeIn('3000');
 			}
 			/* fade the titles, story, and pictures: */
-			$(".kingdomcome").fadeOut(TITLEFADE, function(){
+			$(".kingdomcome").fadeOut(DEFAULTFADE, function(){
 				$(".kingdomtitle").hide();
 				$(".kingdomtitle").append("Kingdom Come<hr>");
-				$(".kingdomtitle").fadeIn(TITLEFADE);
+				$(".kingdomtitle").fadeIn(DEFAULTFADE);
 	
 				$("#narrative").hide();
 				/* BEGIN THE GAME: */
@@ -47,9 +47,18 @@ function kingdom_come(){
 }
 
 function begin_narrative(xml) {
-	xmlDoc = xml.responseXML;
-	txt = xmlDoc.getElementsByTagName("beginning")[0].childNodes[0];
+	var xmlDoc = xml.responseXML;
+	var txt = xmlDoc.getElementsByTagName("beginning")[0].childNodes[0];
 	document.getElementById("narrative").innerHTML = txt.nodeValue;
 	/* FIRST TEXT ANIMATION!!!! */
-	$('#narrative').fadeIn(TITLEFADE * 3);
+	$('#narrative').fadeIn(DEFAULTFADE * 3, function(){ 
+		var x = xmlDoc.getElementsByTagName("decision")[0];
+		var choice = x.getElementsByTagName('choice'); 
+		txt = "<p></p>";
+		for (i = 0; i < choice.length; i++) {
+			txt += "<div class='choice'>"+choice[i].firstChild.nodeValue+"<p></p></div>"
+		}
+		$('#narrative').append(txt);
+		$(".choice").fadeIn(DEFAULTFADE);
+	});
 }

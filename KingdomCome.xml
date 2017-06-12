@@ -4,11 +4,11 @@
 		It’s been a while since work has kept you busy. Eloas isn’t a kingdom without problems, per se, but lately the reputation for recklessness your group has acquired seems to have discouraged some of the more tentative clients from approaching. You aren’t expecting anything different today, but when you open the mail portal, you find a letter waiting inside. 
 	</beginning>
 
-	<decision num="1">
-		<choice num="1">
+	<decision num="0">
+		<choice num="0">
 			Open the letter
 		</choice>
-		<choice num="2">
+		<choice num="1">
 			Wait until Hallis and Vo come
 		</choice>
 	</decision>

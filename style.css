@@ -139,3 +139,21 @@ hr {
      rgba(255,255,255, 0) 80%
   );
 }
+
+.choice {
+	position: relative;
+	padding-left: 10vw;
+	display: none;
+}
+
+@keyframes choices {
+	from {
+		background-color: rgb(255, 204, 255);
+	}
+	to {
+		background-color: rgb(51, 0, 51);
+	}
+}
+.choice:hover{
+	animation: choices 2s ease-in-out infinite alternate;
+}
