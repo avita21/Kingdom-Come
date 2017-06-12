@@ -107,7 +107,7 @@ hr {
 #narrative {
 	position: fixed;
 	text-align: left;
-	font-size: 4vmin;
+	font-size: 3vmin;
 	left: 5vw;
 	/*top: 20vh; */
 	top: 150px;
@@ -122,7 +122,7 @@ hr {
 	#narrative {
 		position: fixed;
 		text-align: left;
-		font-size: 4vmin;
+		font-size: 3vh;
 		left: 25vw;
 		/*top: 20vh; */
 		top: 150px;
