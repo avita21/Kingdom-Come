@@ -56,7 +56,7 @@ function begin_narrative(xml) {
 		var choice = x.getElementsByTagName('choice'); 
 		txt = "<p></p>";
 		for (i = 0; i < choice.length; i++) {
-			txt += "<div class='choice'>"+choice[i].firstChild.nodeValue+"<p></p></div>"
+			txt += "<div class='choice'>"+choice[i].firstChild.nodeValue+"</div><p></p>"
 		}
 		$('#narrative').append(txt);
 		$(".choice").fadeIn(DEFAULTFADE);

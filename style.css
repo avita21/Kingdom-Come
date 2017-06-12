@@ -107,7 +107,7 @@ hr {
 #narrative {
 	position: fixed;
 	text-align: left;
-	font-size: 3vmin;
+	font-size: 4vmin;
 	left: 5vw;
 	/*top: 20vh; */
 	top: 150px;
@@ -130,14 +130,14 @@ hr {
 	}
 
 	hr { 
-    border: 0;
-    width: 59vw;
-    height: 50px;
-    margin-bottom: 50px;
- 	background: 
- 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
- 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
-}
+	    border: 0;
+	    width: 59vw;
+	    height: 50px;
+	    margin-bottom: 50px;
+	 	background: 
+	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
+	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
+	}
 }
 
 #narrative: after{
@@ -155,9 +155,14 @@ hr {
 .choice {
 	position: relative;
 	padding-left: 10vw;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin: 10px;
 	display: none;
 	user-select: none;
 	-moz-user-select: none;
+	border-radius: 10px;
+	border: 2px solid white;
 }
 
 @keyframes choices {
