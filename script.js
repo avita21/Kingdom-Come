@@ -19,9 +19,10 @@ $(document).ready(function(){
 				$(".kingdomtitle").hide();
 				$(".kingdomtitle").append("Kingdom Come<hr>");
 				$(".kingdomtitle").fadeIn(DEFAULTFADE);
-	
-				$("#narrative").hide();
+				/* Add gradient to bottom */
+				$("body").append("<div class='bottom'></div>");
 				/* BEGIN THE GAME: */
+				$("#narrative").hide();
 				kingdom_come();
 			});
 		});
@@ -59,6 +60,8 @@ function begin_narrative(xml) {
 			txt += "<div class='choice'>"+choice[i].firstChild.nodeValue+"</div><p></p>"
 		}
 		$('#narrative').append(txt);
+		$('#narrative').append(xmlDoc.getElementsByTagName('letter')[0].childNodes[0].nodeValue);
+		$('#narrative').append(xmlDoc.getElementsByTagName('openLetter')[0].childNodes[0].nodeValue);
 		$(".choice").fadeIn(DEFAULTFADE);
 	});
 }

@@ -3,19 +3,23 @@ html, body {
 	margin: 0;
 	height: 100%;
 	font-family: "Georgia", serif;
-	overflow: hidden;
 }
 
 #back {
 	height: 100%;
 	background: url(game/images/Greece.jpg) no-repeat center center fixed;
 	background-size: cover;
+	background-attachment: fixed;
 }
 
 .bottom {
 	position: fixed;
-	opacity: 0.5;
 	bottom: 0;
+	height: 10vh;
+	width: 100vw;
+		/* FOR GRADIENT: */
+	background: linear-gradient(to top, 
+		rgba(255,255,255,1) 20%, rgba(255,255,255,0) 80%);
 }
 
 .bottom .left {
@@ -77,8 +81,6 @@ hr {
 }
 
 
-
-
 @keyframes kingdomcomeani {
     from {
     	color: rgb(255, 204, 255);
@@ -105,6 +107,7 @@ hr {
 }
 
 #narrative {
+	overflow: auto;
 	position: fixed;
 	text-align: left;
 	font-size: 4vmin;
@@ -116,10 +119,14 @@ hr {
 	-moz-user-select: none;
 }
 
-
+/* hide the scrollbar while still enabling scrolling 
+#narrative ::-webkit-scrollbar { 
+    display: none; 
+} */
 /* FOR DESKTOP: */
 @media screen and (min-device-width: 600px){ 
 	#narrative {
+		overflow: auto;
 		position: fixed;
 		text-align: left;
 		font-size: 3vh;
@@ -138,18 +145,18 @@ hr {
 	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
 	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
 	}
-}
 
-#narrative: after{
-	position: absolute;
-	bottom: 0;
-	height: 100%;
-	width: 100%;
-  	content: "";
-  	background: linear-gradient(to top,
-     rgba(255,255,255, 1) 20%, 
-     rgba(255,255,255, 0) 80%
-  );
+	.bottom {
+		position: fixed;
+		bottom: 0;
+		right: 50%;
+		transform: translate(50%,50%);
+		height: 70vh;
+		width: 59vw;
+			/* FOR GRADIENT: */
+		background: linear-gradient(to top, 
+			rgba(255,255,255,1) 50%, rgba(255,255,255,0) 90%);
+	}	
 }
 
 .choice {
