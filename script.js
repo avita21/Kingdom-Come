@@ -25,11 +25,6 @@ $(document).ready(function(){
 				
 				$("#narrative").hide();
 				/* HIDE THE SCROLLBAR: */
-				// get the width of the textarea minus scrollbar
-				var textareaWidth = $("#narrative").scrollWidth;
-
-				// width of our wrapper equals width of the inner part of the textarea
-				document.getElementById("scrollbars").style.width = textareaWidth + "px";
 				
 				/* BEGIN THE GAME: */
 				kingdom_come();

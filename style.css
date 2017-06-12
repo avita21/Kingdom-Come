@@ -10,7 +10,6 @@ html, body {
 	background: url(game/images/Greece.jpg) no-repeat center center fixed;
 	background-size: cover;
 	background-attachment: fixed;
-	overflow: hidden;
 }
 
 .bottom {
@@ -25,7 +24,10 @@ html, body {
 
 #scrollbars{
 	overflow: hidden;
-	width: 100vw;
+	width: 60vw;
+	height: 100vh;
+	position: fixed;
+	border: 10px solid purple;
 }
 
 .bottom .left {
@@ -129,31 +131,27 @@ hr {
 /* hide the scrollbar while still enabling scrolling */
 ::-webkit-scrollbar { 
     display: none; 
-    padding-left: 100vw;
-    width: 0px; /*  remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+ /*   width: 0px; /*  remove scrollbar space */
+  /*  background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 /* FOR DESKTOP: */
 @media screen and (min-device-width: 600px){ 
 	#narrative {
-		overflow: auto;
-		position: fixed;
 		text-align: left;
 		font-size: 3vh;
 		left: 25vw;
-		/*top: 20vh; */
-		top: 150px;
 		margin-right: 25vw;
 	}
 
-	hr { 
-	    border: 0;
+	hr {
+		border: none; 
+	  /*  border: 0; */
 	    width: 59vw;
 	    height: 50px;
 	    margin-bottom: 50px;
 	 	background: 
-	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
+	 	linear-gradient(to right, rgba(0,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
 	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
 	}
 
