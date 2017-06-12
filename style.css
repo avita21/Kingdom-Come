@@ -112,6 +112,8 @@ hr {
 	/*top: 20vh; */
 	top: 150px;
 	margin-right: 10vw;
+	user-select: none;
+	-moz-user-select: none;
 }
 
 
@@ -144,6 +146,8 @@ hr {
 	position: relative;
 	padding-left: 10vw;
 	display: none;
+	user-select: none;
+	-moz-user-select: none;
 }
 
 @keyframes choices {
