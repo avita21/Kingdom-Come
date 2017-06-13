@@ -152,6 +152,7 @@ hr {
 	 	background: 
 	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
 	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
+	 	background: url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
 	}
 
 	.bottom {
