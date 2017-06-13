@@ -22,7 +22,6 @@ $(document).ready(function(){
 				/* Add gradient to bottom */
 				$("body").append("<div class='bottom'></div>");
 
-				
 				$("#narrative").hide();
 				/* BEGIN THE GAME: */
 				kingdom_come();
@@ -56,14 +55,42 @@ function begin_narrative(xml) {
 	/* FIRST TEXT ANIMATION!!!! */
 	$('#narrative').fadeIn(DEFAULTFADE * 3, function(){ 
 		var x = xmlDoc.getElementsByTagName("decision")[0];
-		var choice = x.getElementsByTagName('choice'); 
+		var choices = x.getElementsByTagName('choice'); 
 		txt = "<p></p>";
-		for (i = 0; i < choice.length; i++) {
-			txt += "<div class='choice'>"+choice[i].firstChild.nodeValue+"</div><p></p>"
+		/* array of the next story, based on choice: */
+		var next = [open_letter, wait_for_friends];  
+		for (i = 0; i < choices.length; i++) {
+			txt += "<div class='choice'>"+choices[i].firstChild.nodeValue+"</div><p></p>"
 		}
 		$('#narrative').append(txt);
-		$('#narrative').append(xmlDoc.getElementsByTagName('letter')[0].childNodes[0].nodeValue);
-		$('#narrative').append(xmlDoc.getElementsByTagName('openLetter')[0].childNodes[0].nodeValue);
-		$(".choice").fadeIn(DEFAULTFADE);
+		$(".choice").fadeIn(DEFAULTFADE, function(){
+			$(".choice").each(function(index, obj){
+				$(obj).one('click', function(){
+					var color    = new RGBColor($(this).css('background-color'));
+					$(obj).animate({
+						color: jQuery.Color('#FFF'),
+						boxShadow: "0 0 50px 30px rgba(100,100,200,0.4)",
+						opacity: 0}, 
+						{duration: DEFAULTFADE*2,
+						complete: function(){
+									$(".choice").hide();
+									console.log(index);
+									return;
+								} 
+						});
+					$(".choice").animate({opacity: 0}, {duration: DEFAULTFADE});
+				}).delay(DEFAULTFADE*2).promise().then(next[index](xmlDoc));
+			});
+		});
 	});
+}
+
+function open_letter(xml){
+	console.log('open the letter');
+	$('#narrative').append(xml.getElementsByTagName('openLetter')[0].childNodes[0].nodeValue);
+}
+
+function wait_for_friends(xml){
+	console.log('waiting for friends');
+	$('#narrative').append(xml.getElementsByTagName('letter')[0].childNodes[0].nodeValue);
 }
