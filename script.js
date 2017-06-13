@@ -24,8 +24,6 @@ $(document).ready(function(){
 
 				
 				$("#narrative").hide();
-				/* HIDE THE SCROLLBAR: */
-				
 				/* BEGIN THE GAME: */
 				kingdom_come();
 			});

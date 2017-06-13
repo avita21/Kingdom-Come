@@ -22,13 +22,6 @@ html, body {
 		rgba(255,255,255,1) 20%, rgba(255,255,255,0) 80%);
 }
 
-#scrollbars{
-	overflow: hidden;
-	width: 60vw;
-	height: 100vh;
-	position: fixed;
-}
-
 .bottom .left {
 	left: 0;
 }
@@ -55,7 +48,7 @@ html, body {
 .kingdomcome {
 	font-family: "Kingc";
     font-weight: bold;
-    font-size:156px;
+    font-size:56px;
     text-align: center;
   	color: rgb(255, 204, 255);
     text-shadow: 10px 10px 10px rgb(51, 0, 51);
@@ -81,7 +74,6 @@ hr {
     border: 0;
     width: 90vw;
     height: 50px;
-    margin-bottom: 50px;
  	background: 
  	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
  	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
@@ -114,17 +106,20 @@ hr {
 }
 
 #narrative {
-	overflow: auto;
+	overflow-y: auto;
 	position: fixed;
 	text-align: left;
 	font-size: 4vmin;
 	left: 5vw;
-	/*top: 20vh; */
-	top: 150px;
+	top: 15vh;
+	/*top: 150px; */
 	margin-right: 5vw;
 	user-select: none;
 	-moz-user-select: none;
-	height: 100vh;
+	height: 80vh;
+	padding-bottom: -10vh;
+	margin-bottom: 0;
+
 }
 
 /* hide the scrollbar while still enabling scrolling */
@@ -161,7 +156,7 @@ hr {
 		right: 50%;
 		transform: translate(50%,50%);
 		height: 70vh;
-		width: 59vw;
+		width: 60vw;
 			/* FOR GRADIENT: */
 		background: linear-gradient(to top, 
 			rgba(255,255,255,1) 50%, rgba(255,255,255,0) 90%);
@@ -169,6 +164,10 @@ hr {
 
 	.kingdomtitle {
     	font-size:56px;
+	}
+
+	.kingdomcome {
+    	font-size: 156px;
 	}
 }
 
