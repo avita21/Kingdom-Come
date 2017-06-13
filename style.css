@@ -13,24 +13,6 @@ html, body {
 	background-attachment: fixed;
 }
 
-.bottom {
-	position: fixed;
-	bottom: 0;
-	height: 30vh;
-	width: 100vw;
-		/* FOR GRADIENT: */
-	background: linear-gradient(to top, 
-		rgba(255,255,255,1) 20%, rgba(255,255,255,0) 80%);
-}
-
-.bottom .left {
-	left: 0;
-}
-
-.bottom .right {
-	right: 0;
-}
-
 .horflip {
  	-moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -130,12 +112,32 @@ hr {
   /*  background: transparent;  /* optional: just make scrollbar invisible */
 }
 
+
+.bottom {
+	position: fixed;
+	bottom: 0;
+	height: 15vh;
+	width: 100vw;
+		/* FOR GRADIENT: */
+	background: linear-gradient(to top, 
+		rgba(255,255,255,1) 20%, rgba(255,255,255,0) 50%);
+}
+
+.bottom .left {
+	left: 0;
+}
+
+.bottom .right {
+	right: 0;
+}
+
 /* FOR DESKTOP: */
 @media screen and (min-device-width: 600px){ 
 	#narrative {
 		text-align: left;
 		font-size: 3vh;
 		left: 25vw;
+		top: 150px;
 		margin-right: 20vw;
 		padding-right: 5vw;
 	}
