@@ -17,7 +17,7 @@ html, body {
 .bottom {
 	position: fixed;
 	bottom: 0;
-	height: 10vh;
+	height: 30vh;
 	width: 100vw;
 		/* FOR GRADIENT: */
 	background: linear-gradient(to top, 
