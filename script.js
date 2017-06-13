@@ -20,12 +20,12 @@ $(document).ready(function(){
 				$(".kingdomtitle").append("Kingdom Come<hr>");
 				$(".kingdomtitle").fadeIn(DEFAULTFADE);
 				/* Add gradient to bottom */
-				$("body").append("<div class='bottom'></div>");
+				$("body").append("<hr><div class='bottom'></div>");
 
 				
 				$("#narrative").hide();
 				/* BEGIN THE GAME: */
-				kingdom_come();
+			//	kingdom_come();
 			});
 		});
 	});

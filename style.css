@@ -53,10 +53,12 @@ html, body {
     transform: translate(50%,0);
 }
 
-hr { 
-    border: 0;
+hr {
+	border: 0; 
     width: 90vw;
     height: 35px;
+    clear:both;
+    display:block;
  	background: 
  	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
  	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
@@ -142,18 +144,15 @@ hr {
 		padding-right: 5vw;
 	}
 
-/*	hr {
-		z-index: 9999;
-	    border: 0;
-	    width: 59vw;
+	hr {
+	    width: 60vw;
 	    height: 35px;
 	    margin-bottom: 50px;
-	 	background: 
-	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
-	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
-	 	background: url('game/images/FancyBorderSmall.png') repeat-x top center fixed;
+	    position: relative;
+	    float: left;
+		background-image: url(game/images/FancyBorderSmall.png);
 	}
-*/
+
 	.bottom {
 		position: fixed;
 		bottom: 0;
