@@ -11,7 +11,6 @@ html, body {
 	background: url(game/images/Greece.jpg) no-repeat center center fixed;
 	background-size: cover;
 	background-attachment: fixed;
-	overflow: hidden;
 }
 
 .bottom {
@@ -108,7 +107,7 @@ hr {
 }
 
 #narrative {
-	overflow-y: auto;
+	overflow: auto;
 	position: fixed;
 	text-align: left;
 	font-size: 4vmin;
@@ -143,12 +142,12 @@ hr {
 
 	hr {
 		border: none; 
-	  /*  border: 0; */
+	    border: 0;
 	    width: 59vw;
-	    height: 50px;
+	    height: 35px;
 	    margin-bottom: 50px;
 	 	background: 
-	 	linear-gradient(to right, rgba(0,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
+	 	linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,1) 100%),
 	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
 	}
 
