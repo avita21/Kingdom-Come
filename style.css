@@ -116,7 +116,7 @@ hr {
 .bottom {
 	position: fixed;
 	bottom: 0;
-	height: 15vh;
+	height: 10vh;
 	width: 100vw;
 		/* FOR GRADIENT: */
 	background: linear-gradient(to top, 
