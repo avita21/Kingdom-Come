@@ -142,8 +142,7 @@ hr {
 		padding-right: 5vw;
 	}
 
-	hr {
-		border: none; 
+/*	hr {
 		z-index: 9999;
 	    border: 0;
 	    width: 59vw;
@@ -154,7 +153,7 @@ hr {
 	 	url(game/images/FancyBorderSmall.png) repeat-x top center fixed;
 	 	background: url('game/images/FancyBorderSmall.png') repeat-x top center fixed;
 	}
-
+*/
 	.bottom {
 		position: fixed;
 		bottom: 0;
