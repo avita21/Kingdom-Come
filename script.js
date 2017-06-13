@@ -17,7 +17,7 @@ $(document).ready(function(){
 			/* fade the titles, story, and pictures: */
 			$(".kingdomcome").fadeOut(DEFAULTFADE, function(){
 				$(".kingdomtitle").hide();
-				$(".kingdomtitle").append("Kingdom Come<hr>");
+				$(".kingdomtitle").append("Kingdom Come<hr alt='NOTSHOWING'>");
 				$(".kingdomtitle").fadeIn(DEFAULTFADE);
 				/* Add gradient to bottom */
 				$("body").append("<div class='bottom'></div>");

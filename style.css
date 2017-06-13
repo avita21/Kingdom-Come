@@ -27,7 +27,6 @@ html, body {
 	width: 60vw;
 	height: 100vh;
 	position: fixed;
-	border: 10px solid purple;
 }
 
 .bottom .left {
@@ -68,7 +67,7 @@ html, body {
 	margin: 0 auto;
 	font-family: "Kingc";
     font-weight: bold;
-    font-size:56px;
+    font-size: 30px;
   	color: rgb(51, 0, 51);
     text-shadow: 3px 3px 5px rgb(255, 204, 255);
     top:0;
@@ -141,7 +140,8 @@ hr {
 		text-align: left;
 		font-size: 3vh;
 		left: 25vw;
-		margin-right: 25vw;
+		margin-right: 20vw;
+		padding-right: 5vw;
 	}
 
 	hr {
@@ -166,6 +166,10 @@ hr {
 		background: linear-gradient(to top, 
 			rgba(255,255,255,1) 50%, rgba(255,255,255,0) 90%);
 	}	
+
+	.kingdomtitle {
+    	font-size:56px;
+	}
 }
 
 .choice {
