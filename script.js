@@ -53,7 +53,7 @@ function begin_narrative(xml) {
 	var txt = xmlDoc.getElementsByTagName("beginning")[0].childNodes[0];
 	document.getElementById("narrative").innerHTML = txt.nodeValue;
 	/* FIRST TEXT ANIMATION!!!! */
-	$('#narrative').fadeIn(DEFAULTFADE * 3, function(){ 
+	$('#narrative').fadeIn(DEFAULTFADE * 3).promise().done(function(){ 
 		var x = xmlDoc.getElementsByTagName("decision")[0];
 		var choices = x.getElementsByTagName('choice'); 
 		txt = "<p></p>";
@@ -63,23 +63,27 @@ function begin_narrative(xml) {
 			txt += "<div class='choice'>"+choices[i].firstChild.nodeValue+"</div><p></p>"
 		}
 		$('#narrative').append(txt);
-		$(".choice").fadeIn(DEFAULTFADE, function(){
+		console.log("here once?")
+		$(".choice").delay(DEFAULTFADE*3).fadeIn(DEFAULTFADE).promise().done(function(){
+			console.log("in faded narrative once?");
 			$(".choice").each(function(index, obj){
 				$(obj).one('click', function(){
+					console.log("in clicked once?");
 					var color    = new RGBColor($(this).css('background-color'));
 					$(obj).animate({
 						color: jQuery.Color('#FFF'),
 						boxShadow: "0 0 50px 30px rgba(100,100,200,0.4)",
 						opacity: 0}, 
-						{duration: DEFAULTFADE*2,
+						{duration: DEFAULTFADE*3,
 						complete: function(){
 									$(".choice").hide();
 									console.log(index);
+									next[index](xmlDoc);
 									return;
-								} 
+								}
 						});
 					$(".choice").animate({opacity: 0}, {duration: DEFAULTFADE});
-				}).delay(DEFAULTFADE*2).promise().then(next[index](xmlDoc));
+				});
 			});
 		});
 	});
@@ -87,10 +91,18 @@ function begin_narrative(xml) {
 
 function open_letter(xml){
 	console.log('open the letter');
-	$('#narrative').append(xml.getElementsByTagName('openLetter')[0].childNodes[0].nodeValue);
+	$('#narrative').append("<span>" +
+		xml.getElementsByTagName('openLetter')[0].childNodes[0].nodeValue +
+		"</span>");
+	$("span").fadeIn(DEFAULTFADE);
 }
 
 function wait_for_friends(xml){
 	console.log('waiting for friends');
-	$('#narrative').append(xml.getElementsByTagName('letter')[0].childNodes[0].nodeValue);
+	var html = "<span>"+xml.getElementsByTagName('letter')[0].childNodes[0].nodeValue+"</span>";
+	$(html).hide().appendTo("#narrative").fadeIn(DEFAULTFADE).promise().done(function(){
+			console.log('appended');
+			var nextTxt = "<span>"+xml.getElementsByTagName('letter')[0].childNodes[0].nodeValue+"</span>";
+			$(nextTxt).hide().delay(DEFAULTFADE).appendTo("#narrative").fadeIn(DEFAULTFADE);
+	});
 }

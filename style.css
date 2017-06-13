@@ -107,6 +107,11 @@ hr {
 
 }
 
+#narrative span {
+	display: none;
+	position: relative;
+}
+
 /* hide the scrollbar while still enabling scrolling */
 ::-webkit-scrollbar { 
     display: none; 
