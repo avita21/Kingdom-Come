@@ -2,7 +2,6 @@
 
 /* CONSTANTS: */
 var DEFAULTFADE = 1000;
-var Cookies = require('cookies-js');
 
 Cookies.defaults = {
 	path: '/',
@@ -46,7 +45,8 @@ function kingdom_come(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-	    	if (Cookie('saved') == 'True') {
+	    	console.log("Cookie: " + Cookies.get('saved'));
+	    	if (Cookies.get('saved') == 'True') {
 	    		load_game(this);
 	    	} else {
 	        	begin_narrative(this);
@@ -58,8 +58,8 @@ function kingdom_come(){
 }
 
 function load_game(xml) {
-	console.log(Cookie('saved'));
-	console.log('Choice: ' + Cookie('0'));
+	console.log(Cookies.get('saved'));
+	console.log('Choice: ' + Cookies.get('0'));
 }
 
 
@@ -98,8 +98,9 @@ function begin_narrative(xml) {
 									console.log(index);
 									next[index](xmlDoc);
 									/* SAVE THE CHOICE MADE AS A COOKIE!! */
-									Cookie.set("0", index.toString());
-									Cookie.set("saved", "True");
+									Cookies.set("0", index.toString());
+									Cookies.set("saved", "True");
+									console.log("Saved: " + Cookies.get("saved"));
 									return;
 								}
 						});
