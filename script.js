@@ -2,7 +2,12 @@
 
 /* CONSTANTS: */
 var DEFAULTFADE = 1000;
+var Cookies = require('cookies-js');
 
+Cookies.defaults = {
+	path: '/',
+	secure: true
+}
 /* Fade out title on click */
 $(document).ready(function(){
 	/* Detect if on desktop: */
@@ -41,12 +46,25 @@ function kingdom_come(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-	        begin_narrative(this);
+	    	if (Cookie('saved') == 'True') {
+	    		load_game(this);
+	    	} else {
+	        	begin_narrative(this);
+	        }
 	    }
 	};
 	xhttp.open("GET", "KingdomCome.xml", true);
 	xhttp.send();
 }
+
+function load_game(xml) {
+	console.log(Cookie('saved'));
+	console.log('Choice: ' + Cookie('0'));
+}
+
+
+
+/* JQUERY SCROLL TO BOTTOM OF DIV: $("#mydiv").scrollTop($("#mydiv")[0].scrollHeight); */
 
 function begin_narrative(xml) {
 	var xmlDoc = xml.responseXML;
@@ -79,6 +97,9 @@ function begin_narrative(xml) {
 									$(".choice").hide();
 									console.log(index);
 									next[index](xmlDoc);
+									/* SAVE THE CHOICE MADE AS A COOKIE!! */
+									Cookie.set("0", index.toString());
+									Cookie.set("saved", "True");
 									return;
 								}
 						});
